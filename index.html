@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Evaluador financiero de proyectos de ingeniería: CAPEX, personal, OPEX, VAN, TIR y flujo de fondos.">
+  <title>EvalPro · Evaluación económica de proyectos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="min-h-screen flex flex-col lg:flex-row">
+  <aside id="sidebar" class="lg:fixed lg:inset-y-0 lg:left-0 lg:w-[266px] bg-slate-900 text-white z-20 flex flex-col">
+    <div class="p-5 lg:p-7 border-b border-slate-700/70">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-blue-600 grid place-items-center text-xl">◈</div><div><div class="font-extrabold tracking-tight text-lg">EvalPro <span class="text-blue-400">/</span></div><div class="text-[11px] text-slate-400">Ingeniería & finanzas</div></div></div>
+    </div>
+    <div class="px-3 lg:px-4 py-3 lg:py-5 flex-1 overflow-hidden lg:overflow-y-auto">
+      <div class="text-[10px] tracking-[.18em] uppercase font-bold text-slate-500 px-3 mb-2">Vistas principales</div>
+      <div class="grid grid-cols-2 lg:grid-cols-1 gap-1 mb-5">
+        <button class="side-link" data-nav="general">◫ <span>Datos generales</span></button>
+        <button class="side-link" data-nav="results">▥ <span>Resultados</span></button>
+      </div>
+      <div class="text-[10px] tracking-[.18em] uppercase font-bold text-slate-500 px-3 mb-2">Carga por etapas</div>
+      <nav id="side-steps" class="space-y-1"></nav>
+    </div>
+    <div class="hidden lg:block p-5 border-t border-slate-700/70"><div class="text-xs font-semibold text-slate-300 mb-2">Progreso de carga</div><div class="bg-slate-700 rounded-full h-1.5 overflow-hidden"><div id="progress-bar" class="bg-blue-500 h-full rounded-full" style="width:0%"></div></div><div class="text-[11px] text-slate-400 mt-2">Guardado local automático</div></div>
+  </aside>
+  <div id="workspace" class="flex-1 min-w-0 lg:ml-[266px]">
+    <header class="bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-7 lg:px-10 h-auto min-h-[78px] py-3 flex flex-wrap gap-3 items-center justify-between sticky top-0 z-10">
+      <div><div class="text-xs font-semibold text-slate-400 uppercase tracking-wide" id="top-section">Proyecto</div><div class="text-lg sm:text-xl font-extrabold tracking-tight" id="top-project">Proyecto de ingeniería</div></div>
+      <div class="flex items-center flex-wrap gap-2 no-print">
+        <span id="autosave" class="hidden sm:inline text-xs text-emerald-700 font-medium">● Guardado local</span>
+        <button class="btn btn-white" data-action="export-json">↓ Guardar proyecto</button>
+        <button class="btn btn-primary" data-nav="results">Ver resultados →</button>
+      </div>
+    </header>
+    <main class="max-w-[1510px] mx-auto p-4 sm:p-7 lg:px-10 lg:py-8" id="main"></main>
+  </div>
+</div>
+<input type="file" accept="application/json,.json" id="file-import" class="hidden">
+<div id="field-tooltip" role="tooltip" hidden></div>
+<div id="toast" role="status" class="fixed bottom-5 right-5 bg-slate-900 text-white rounded-xl shadow-xl px-5 py-3 text-sm opacity-0 pointer-events-none translate-y-2 z-50"></div>
+<script defer src="assets/js/app.js"></script>
+</body>
+</html>
